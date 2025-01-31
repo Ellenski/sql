@@ -45,17 +45,31 @@ There are several tools online you can use, I'd recommend [Draw.io](https://www.
 
 **HINT:** You do not need to create any data for this prompt. This is a conceptual model only. 
 
+#### Answer:
+
+<img src = "./Assignment2_1_1.drawio.png">
+
 #### Prompt 2
 We want to create employee shifts, splitting up the day into morning and evening. Add this to the ERD.
+
+#### Answer:
+
+<img src = "./Assignment2_1_2.drawio.png">
 
 #### Prompt 3
 The store wants to keep customer addresses. Propose two architectures for the CUSTOMER_ADDRESS table, one that will retain changes, and another that will overwrite. Which is type 1, which is type 2? 
 
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
-```
-Your answer...
-```
+#### Answer:
+
+A type one slowly changing dimension overwrites existing data if a value of that data changed. For my Type 1 customer address table, I included two columns: Customer_ID and Customer_Postal_Code. The Customer_ID is the unique identifier for each book store customer and the Customer_Postal_Code is meant to represent the customer address. For the sake of simplicity, I included only a single column to represent the customer address, but this information would likely be split into many columns such as house number, street, city, etc. Here, a change to a customer address would overwrite the Customer_Postal_Code column and the historical data would be lost. An image of what this table might look like can be seen below:
+
+<img src = "./Assign2_Customer_Address_Type1.drawio.png">
+
+A type two slowly changing dimension writes any changes to column values as their own separate rows so that it is possible to track how the data has changed overtime or, in this case, to track when a customer address changes. For my Type 2 customer address table, I included four columns: Customer_ID, Customer_Postal_Code, Effective_Start_Date and Effective_End_Date. As with the Type 1 table, the Customer_ID and Customer_Postal_Code columns represent the unique customer identifiers and the customer addresses respectively. The Effective_Start_Date column indicates the date that the data was inputted into the database and the Effective_End_Date represents some arbitrarily far away date working under the assumption that the customer will always have a particular address. However, if a customer's address changes, these latter two rows allow for the inclusion of a new address while keeping the old one. Here, the addition of a new address for a particular customer ID will cause the Effective_End_Date of the old address to change to the date that the address changed and was added to the system. The new address will have an Effective_Start_Date equivalent to the day the change was made and added to the system and an Effective_End_Date will be the original arbitrarily far away date again working under the assumption that this new address will not change. An image of what this table might look like can be seen below:
+
+<img src = "./Assign2_Customer_Address_Type2.drawio.png">
 
 ***
 
@@ -180,7 +194,7 @@ Read: Boykis, V. (2019, October 16). _Neural nets are just people all the way do
 
 Consider, for example, concepts of labour, bias, LLM proliferation, moderating content, intersection of technology and society, ect. 
 
+**ANSWER:**
 
-```
-Your thoughts...
-```
+In the article “Neural nets are just people all the way down”, Vicki Boykis describes how ImageNet—an image training set for AI algorithms—came to exist. While describing the history of this repository and the many levels of human labour necessary to create it, Boykis alludes to several significant ethical issues related to this work and the AI products that come out of it. First and foremost are the ethical issues surrounding labour recognition and labour exploitation. ImageNet and the entities this software is based on—WordNet and the Brown Corpus—are each attributed to one or several major authors/creators. Yet, all of these innovations are actually the product of collaborative interactions with numerous individuals including students, co-workers, spouses and employees just to name a few. While such interactions are common practice in the academic sphere and collaborators are often compensated with payment, work experience or a brief acknowledgement in any resulting publications, the contributions of these individuals are often downplayed particularly in media until they are eventually forgotten altogether. More concerning however, is the potential labour exploitation that may have accompanied the creation of ImageNet. In the article, Boykis describes how Dr. Li—the principal investigator behind ImageNet—utilized Amazon Mechanical Turk as a way to crowdsource image labelling and keep the costs of doing so relatively low. Using this website, Dr. Li had access to an army of workers from across the globe, but she also had no way of knowing the conditions that her anonymous employees were working under. It is very easy to imagine how something like Amazon Mechanical Turk could turn into a kind of digital sweat shop where vulnerable individuals are forced to work on tasks by a local power and do not receive the entirety or any of the money they are supposedly earning. Even in cases where workers are acting independently, there are no means for them to negotiate things like salary with their employers and there are no policies in place that protect workers’ rights and safety. Altogether, Amazon Mechanical Turk as a labour source is a fertile breeding ground for worker exploitation and, based on some the articles that pop up when you google the website, many labour activists agree with this sentiment. The other major ethical issue that Boykis touches upon in her article is the way that human bias and prejudice can affect an AI training set and the outputs from AI algorithms. The ImageNet repository is based on products from three main human-driven sources: the Brown Corpus, WordNet and Amazon Mechanical Turk. By default, each of these sources will have a certain amount of bias and prejudice incorporated into them by their creators and contributors—either willingly or unwillingly—that may not reflect the views of the team behind ImageNet or its users. For example, the Brown Corpus was designed using information collected from American 1960s written products. However, the ideals of the 1960s relating to subjects like gender roles, sexuality, human rights, etc. are extremely different from what they are presently. By utilizing this older information source, the creators of WordNet and, in turn, ImageNet are incorporating 1960s biases into their products that are not reflective of current-day viewpoints. Likewise, WordNet was released in the 1980s and may have biases and prejudices associated with this time period that will also be incorporated into ImageNet. Finally, Amazon Mechanical Turk employs workers from all over the world that represent innumerable social and cultural backgrounds and the biases and prejudices that come with them. While Dr. Li did include a filter to account for workers who were not labeling images as expected, this filter was not designed to account for the possibly divergent ideals of her workforce. So, as a whole, ImageNet incorporated biases from 1960s America, from 1980s America and from the global viewpoints of the 2000s. As a result of these biases, it was found that ImageNet labels associated with humans or the “person” subtree were often offensive and sometimes racist which means that any AI algorithms using these “person-related” training sets would also integrate these issues. Overall, this idea highlights an important problem associated with AI training sets and AI in general. While the collective human consciousness is endlessly dynamic and changing, an AI algorithm can only innovate based on the information included in its training set. These training sets can be updated to reflect changing viewpoints, but they can never truly keep pace with human society meaning that AI outputs will always lag somewhat behind the present-day ideals. With AI being included in more and more services, it is unclear how widespread this potential “lag” is and what the repercussions will be moving forward though the current state of ImageNet with its 1593 “offensive” human labels may offer some insight.
+
